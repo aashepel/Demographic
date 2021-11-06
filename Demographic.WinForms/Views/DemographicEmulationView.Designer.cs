@@ -28,30 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea25 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series25 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title25 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea26 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series26 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title26 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea27 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series27 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title27 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea28 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series28 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title28 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea29 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series29 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title29 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea30 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series30 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title30 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea31 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series31 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title31 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea32 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series32 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title32 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea33 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series33 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title33 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea34 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series34 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title34 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea35 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series35 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title35 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea36 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series36 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title36 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea37 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series37 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title37 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea38 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series38 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title38 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea39 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series39 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title39 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea40 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series40 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title40 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.comboBoxYearValues = new System.Windows.Forms.ComboBox();
             this.btnOpenInitialAgeRulesFile = new System.Windows.Forms.Button();
             this.lblDeathRuleFilePath = new System.Windows.Forms.Label();
@@ -81,6 +81,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.buttonCancelEmulation = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStartYear)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFinalYear)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownKoeff)).BeginInit();
@@ -302,167 +303,167 @@
             // 
             // chartCountTotalFemaleAlivePersons
             // 
-            chartArea25.Name = "ChartArea1";
-            this.chartCountTotalFemaleAlivePersons.ChartAreas.Add(chartArea25);
+            chartArea33.Name = "ChartArea1";
+            this.chartCountTotalFemaleAlivePersons.ChartAreas.Add(chartArea33);
             this.chartCountTotalFemaleAlivePersons.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chartCountTotalFemaleAlivePersons.Location = new System.Drawing.Point(3, 603);
             this.chartCountTotalFemaleAlivePersons.Name = "chartCountTotalFemaleAlivePersons";
-            series25.BorderWidth = 5;
-            series25.ChartArea = "ChartArea1";
-            series25.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series25.MarkerBorderWidth = 10;
-            series25.MarkerSize = 10;
-            series25.Name = "Series1";
-            this.chartCountTotalFemaleAlivePersons.Series.Add(series25);
+            series33.BorderWidth = 5;
+            series33.ChartArea = "ChartArea1";
+            series33.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series33.MarkerBorderWidth = 10;
+            series33.MarkerSize = 10;
+            series33.Name = "Series1";
+            this.chartCountTotalFemaleAlivePersons.Series.Add(series33);
             this.chartCountTotalFemaleAlivePersons.Size = new System.Drawing.Size(1880, 194);
             this.chartCountTotalFemaleAlivePersons.TabIndex = 3;
             this.chartCountTotalFemaleAlivePersons.Text = "chart1";
-            title25.Name = "MainTitle";
-            title25.Text = "Динамика населения женского пола по годам";
-            this.chartCountTotalFemaleAlivePersons.Titles.Add(title25);
+            title33.Name = "MainTitle";
+            title33.Text = "Динамика населения женского пола по годам";
+            this.chartCountTotalFemaleAlivePersons.Titles.Add(title33);
             // 
             // chartCountTotalDeathPersons
             // 
-            chartArea26.Name = "ChartArea1";
-            this.chartCountTotalDeathPersons.ChartAreas.Add(chartArea26);
+            chartArea34.Name = "ChartArea1";
+            this.chartCountTotalDeathPersons.ChartAreas.Add(chartArea34);
             this.chartCountTotalDeathPersons.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chartCountTotalDeathPersons.Location = new System.Drawing.Point(3, 203);
             this.chartCountTotalDeathPersons.Name = "chartCountTotalDeathPersons";
-            series26.BorderWidth = 5;
-            series26.ChartArea = "ChartArea1";
-            series26.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series26.MarkerBorderWidth = 10;
-            series26.MarkerSize = 10;
-            series26.Name = "Series1";
-            this.chartCountTotalDeathPersons.Series.Add(series26);
+            series34.BorderWidth = 5;
+            series34.ChartArea = "ChartArea1";
+            series34.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series34.MarkerBorderWidth = 10;
+            series34.MarkerSize = 10;
+            series34.Name = "Series1";
+            this.chartCountTotalDeathPersons.Series.Add(series34);
             this.chartCountTotalDeathPersons.Size = new System.Drawing.Size(1880, 194);
             this.chartCountTotalDeathPersons.TabIndex = 1;
             this.chartCountTotalDeathPersons.Text = "chart1";
-            title26.Name = "MainTitle";
-            title26.Text = "Динамика умершего населения по годам";
-            this.chartCountTotalDeathPersons.Titles.Add(title26);
+            title34.Name = "MainTitle";
+            title34.Text = "Динамика умершего населения по годам";
+            this.chartCountTotalDeathPersons.Titles.Add(title34);
             // 
             // chartCountTotalAlivePersons
             // 
-            chartArea27.Name = "ChartArea1";
-            this.chartCountTotalAlivePersons.ChartAreas.Add(chartArea27);
+            chartArea35.Name = "ChartArea1";
+            this.chartCountTotalAlivePersons.ChartAreas.Add(chartArea35);
             this.chartCountTotalAlivePersons.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chartCountTotalAlivePersons.Location = new System.Drawing.Point(3, 3);
             this.chartCountTotalAlivePersons.Name = "chartCountTotalAlivePersons";
-            series27.BorderWidth = 5;
-            series27.ChartArea = "ChartArea1";
-            series27.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series27.MarkerBorderWidth = 10;
-            series27.MarkerSize = 10;
-            series27.Name = "Series1";
-            this.chartCountTotalAlivePersons.Series.Add(series27);
+            series35.BorderWidth = 5;
+            series35.ChartArea = "ChartArea1";
+            series35.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series35.MarkerBorderWidth = 10;
+            series35.MarkerSize = 10;
+            series35.Name = "Series1";
+            this.chartCountTotalAlivePersons.Series.Add(series35);
             this.chartCountTotalAlivePersons.Size = new System.Drawing.Size(1880, 194);
             this.chartCountTotalAlivePersons.TabIndex = 0;
             this.chartCountTotalAlivePersons.Text = "chartCountTotalAlivePersons";
-            title27.Name = "MainTitle";
-            title27.Text = "Динамика населения по годам";
-            this.chartCountTotalAlivePersons.Titles.Add(title27);
+            title35.Name = "MainTitle";
+            title35.Text = "Динамика населения по годам";
+            this.chartCountTotalAlivePersons.Titles.Add(title35);
             // 
             // chartBirthPerYear
             // 
-            chartArea28.Name = "ChartArea1";
-            this.chartBirthPerYear.ChartAreas.Add(chartArea28);
+            chartArea36.Name = "ChartArea1";
+            this.chartBirthPerYear.ChartAreas.Add(chartArea36);
             this.chartBirthPerYear.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chartBirthPerYear.Location = new System.Drawing.Point(3, 803);
             this.chartBirthPerYear.Name = "chartBirthPerYear";
-            series28.BorderWidth = 5;
-            series28.ChartArea = "ChartArea1";
-            series28.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series28.Name = "Series1";
-            this.chartBirthPerYear.Series.Add(series28);
+            series36.BorderWidth = 5;
+            series36.ChartArea = "ChartArea1";
+            series36.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series36.Name = "Series1";
+            this.chartBirthPerYear.Series.Add(series36);
             this.chartBirthPerYear.Size = new System.Drawing.Size(1880, 194);
             this.chartBirthPerYear.TabIndex = 13;
             this.chartBirthPerYear.Text = "chart1";
-            title28.Name = "MainTitle";
-            title28.Text = "Рождаемость";
-            this.chartBirthPerYear.Titles.Add(title28);
+            title36.Name = "MainTitle";
+            title36.Text = "Рождаемость";
+            this.chartBirthPerYear.Titles.Add(title36);
             // 
             // chartCountTotalMaleAlivePersons
             // 
-            chartArea29.Name = "ChartArea1";
-            this.chartCountTotalMaleAlivePersons.ChartAreas.Add(chartArea29);
+            chartArea37.Name = "ChartArea1";
+            this.chartCountTotalMaleAlivePersons.ChartAreas.Add(chartArea37);
             this.chartCountTotalMaleAlivePersons.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chartCountTotalMaleAlivePersons.Location = new System.Drawing.Point(3, 403);
             this.chartCountTotalMaleAlivePersons.Name = "chartCountTotalMaleAlivePersons";
-            series29.BorderWidth = 5;
-            series29.ChartArea = "ChartArea1";
-            series29.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series29.MarkerBorderWidth = 10;
-            series29.MarkerSize = 10;
-            series29.Name = "Series1";
-            this.chartCountTotalMaleAlivePersons.Series.Add(series29);
+            series37.BorderWidth = 5;
+            series37.ChartArea = "ChartArea1";
+            series37.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series37.MarkerBorderWidth = 10;
+            series37.MarkerSize = 10;
+            series37.Name = "Series1";
+            this.chartCountTotalMaleAlivePersons.Series.Add(series37);
             this.chartCountTotalMaleAlivePersons.Size = new System.Drawing.Size(1880, 194);
             this.chartCountTotalMaleAlivePersons.TabIndex = 2;
             this.chartCountTotalMaleAlivePersons.Text = "chart1";
-            title29.Name = "MainTitle";
-            title29.Text = "Динамика населения мужского пола по годам";
-            this.chartCountTotalMaleAlivePersons.Titles.Add(title29);
+            title37.Name = "MainTitle";
+            title37.Text = "Динамика населения мужского пола по годам";
+            this.chartCountTotalMaleAlivePersons.Titles.Add(title37);
             // 
             // chartDeathPerYear
             // 
-            chartArea30.Name = "ChartArea1";
-            this.chartDeathPerYear.ChartAreas.Add(chartArea30);
+            chartArea38.Name = "ChartArea1";
+            this.chartDeathPerYear.ChartAreas.Add(chartArea38);
             this.chartDeathPerYear.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chartDeathPerYear.Location = new System.Drawing.Point(3, 1003);
             this.chartDeathPerYear.Name = "chartDeathPerYear";
-            series30.BorderWidth = 5;
-            series30.ChartArea = "ChartArea1";
-            series30.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series30.Name = "Series1";
-            this.chartDeathPerYear.Series.Add(series30);
+            series38.BorderWidth = 5;
+            series38.ChartArea = "ChartArea1";
+            series38.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series38.Name = "Series1";
+            this.chartDeathPerYear.Series.Add(series38);
             this.chartDeathPerYear.Size = new System.Drawing.Size(1880, 194);
             this.chartDeathPerYear.TabIndex = 15;
             this.chartDeathPerYear.Text = "chart1";
-            title30.Name = "MainTitle";
-            title30.Text = "Смертность";
-            this.chartDeathPerYear.Titles.Add(title30);
+            title38.Name = "MainTitle";
+            title38.Text = "Смертность";
+            this.chartDeathPerYear.Titles.Add(title38);
             // 
             // chartCountTotalMaleDeathPersons
             // 
-            chartArea31.Name = "ChartArea1";
-            this.chartCountTotalMaleDeathPersons.ChartAreas.Add(chartArea31);
+            chartArea39.Name = "ChartArea1";
+            this.chartCountTotalMaleDeathPersons.ChartAreas.Add(chartArea39);
             this.chartCountTotalMaleDeathPersons.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chartCountTotalMaleDeathPersons.Location = new System.Drawing.Point(3, 1203);
             this.chartCountTotalMaleDeathPersons.Name = "chartCountTotalMaleDeathPersons";
-            series31.BorderWidth = 5;
-            series31.ChartArea = "ChartArea1";
-            series31.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series31.MarkerBorderWidth = 10;
-            series31.MarkerSize = 10;
-            series31.Name = "Series1";
-            this.chartCountTotalMaleDeathPersons.Series.Add(series31);
+            series39.BorderWidth = 5;
+            series39.ChartArea = "ChartArea1";
+            series39.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series39.MarkerBorderWidth = 10;
+            series39.MarkerSize = 10;
+            series39.Name = "Series1";
+            this.chartCountTotalMaleDeathPersons.Series.Add(series39);
             this.chartCountTotalMaleDeathPersons.Size = new System.Drawing.Size(1880, 194);
             this.chartCountTotalMaleDeathPersons.TabIndex = 16;
             this.chartCountTotalMaleDeathPersons.Text = "chart1";
-            title31.Name = "MainTitle";
-            title31.Text = "Количество умерших мужчин по годам";
-            this.chartCountTotalMaleDeathPersons.Titles.Add(title31);
+            title39.Name = "MainTitle";
+            title39.Text = "Количество умерших мужчин по годам";
+            this.chartCountTotalMaleDeathPersons.Titles.Add(title39);
             // 
             // chartCountTotalFemaleDeathPersons
             // 
-            chartArea32.Name = "ChartArea1";
-            this.chartCountTotalFemaleDeathPersons.ChartAreas.Add(chartArea32);
+            chartArea40.Name = "ChartArea1";
+            this.chartCountTotalFemaleDeathPersons.ChartAreas.Add(chartArea40);
             this.chartCountTotalFemaleDeathPersons.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chartCountTotalFemaleDeathPersons.Location = new System.Drawing.Point(3, 1403);
             this.chartCountTotalFemaleDeathPersons.Name = "chartCountTotalFemaleDeathPersons";
-            series32.BorderWidth = 5;
-            series32.ChartArea = "ChartArea1";
-            series32.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series32.MarkerBorderWidth = 10;
-            series32.MarkerSize = 10;
-            series32.Name = "Series1";
-            this.chartCountTotalFemaleDeathPersons.Series.Add(series32);
+            series40.BorderWidth = 5;
+            series40.ChartArea = "ChartArea1";
+            series40.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series40.MarkerBorderWidth = 10;
+            series40.MarkerSize = 10;
+            series40.Name = "Series1";
+            this.chartCountTotalFemaleDeathPersons.Series.Add(series40);
             this.chartCountTotalFemaleDeathPersons.Size = new System.Drawing.Size(1880, 194);
             this.chartCountTotalFemaleDeathPersons.TabIndex = 17;
             this.chartCountTotalFemaleDeathPersons.Text = "chart1";
-            title32.Name = "MainTitle";
-            title32.Text = "Количество умерших женщин по годам";
-            this.chartCountTotalFemaleDeathPersons.Titles.Add(title32);
+            title40.Name = "MainTitle";
+            title40.Text = "Количество умерших женщин по годам";
+            this.chartCountTotalFemaleDeathPersons.Titles.Add(title40);
             // 
             // tableLayoutPanel1
             // 
@@ -511,6 +512,15 @@
             this.progressBar1.Size = new System.Drawing.Size(320, 23);
             this.progressBar1.TabIndex = 25;
             // 
+            // buttonCancelEmulation
+            // 
+            this.buttonCancelEmulation.Location = new System.Drawing.Point(12, 110);
+            this.buttonCancelEmulation.Name = "buttonCancelEmulation";
+            this.buttonCancelEmulation.Size = new System.Drawing.Size(298, 23);
+            this.buttonCancelEmulation.TabIndex = 26;
+            this.buttonCancelEmulation.Text = "Отменить процесс моделирования";
+            this.buttonCancelEmulation.UseVisualStyleBackColor = true;
+            // 
             // DemographicEmulationView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -518,6 +528,7 @@
             this.AutoScroll = true;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1904, 1061);
+            this.Controls.Add(this.buttonCancelEmulation);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.numericUpDownKoeff);
@@ -587,6 +598,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Button buttonCancelEmulation;
     }
 }
 

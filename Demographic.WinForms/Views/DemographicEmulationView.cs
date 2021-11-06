@@ -16,6 +16,9 @@ namespace Demographic.WinForms
     public partial class DemographicEmulationView : Form, IDemographicEmulationView
     {
 
+        private List<Chart> _splineCharts = new List<Chart>();
+
+
         public event Action InitialAgeRulesOpenFileClick;
 
         public event Action DeathRulesOpenFileClick;
@@ -30,13 +33,26 @@ namespace Demographic.WinForms
 
         public event Action<uint> KoeffValueChange;
 
+        public event Action CancelEmulationClick;
+
         public DemographicEmulationView()
         {
             InitializeComponent();
 
+            _splineCharts.Add(chartBirthPerYear);
+            _splineCharts.Add(chartCountTotalAlivePersons);
+            _splineCharts.Add(chartCountTotalDeathPersons);
+            _splineCharts.Add(chartCountTotalFemaleAlivePersons);
+            _splineCharts.Add(chartCountTotalFemaleDeathPersons);
+            _splineCharts.Add(chartCountTotalMaleAlivePersons);
+            _splineCharts.Add(chartCountTotalMaleDeathPersons);
+            _splineCharts.Add(chartDeathPerYear);
+
+
             btnStartEmulation.Click += (sender, e) => StartEmulationClick?.Invoke();
             btnOpenInitialAgeRulesFile.Click += (sender, e) => InitialAgeRulesOpenFileClick?.Invoke();
             btnDeathRuleFileOpen.Click += (sender, e) => DeathRulesOpenFileClick?.Invoke();
+            buttonCancelEmulation.Click += (sender, e) => CancelEmulationClick?.Invoke();
 
             textBoxCountPersonsStart.TextChanged += (sender, e) => CountPersonsStartChange?.Invoke(textBoxCountPersonsStart.Text);
             numericUpDownStartYear.ValueChanged += (sender, e) => StartYearValueChange?.Invoke((int)numericUpDownStartYear.Value);
@@ -129,6 +145,8 @@ namespace Demographic.WinForms
         {
             ConfiguringSplineChart(chart);
 
+            ToolTip toolTip = new ToolTip();
+
             var series = chart.Series[0];
             series.Points.Clear();
             foreach (var point in values)
@@ -156,6 +174,19 @@ namespace Demographic.WinForms
         void IDemographicEmulationView.SetProgressBarValue(int value)
         {
             progressBar1.Value = value;
+        }
+
+        private void ClearChart(Chart chart)
+        {
+            chart.Series[0].Points.Clear();
+        }
+
+        void IDemographicEmulationView.ClearSplineCharts()
+        {
+            foreach(var chart in _splineCharts)
+            {
+                ClearChart(chart);
+            }
         }
     }
 }

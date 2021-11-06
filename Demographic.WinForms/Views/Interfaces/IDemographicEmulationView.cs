@@ -24,6 +24,8 @@ namespace Demographic.WinForms.Views.Interfaces
 
         event Action<uint> KoeffValueChange;
 
+        event Action CancelEmulationClick;
+
         void RenderCountTotalAlivePersonsChart(List<UIntValuePair> values);
 
         void RenderCountTotalDeathPersonsChart(List<UIntValuePair> values);
@@ -45,5 +47,7 @@ namespace Demographic.WinForms.Views.Interfaces
         void SetValuesComboBoxYear(List<int> values);
 
         void SetProgressBarValue(int value);
+
+        void ClearSplineCharts();
     }
 }

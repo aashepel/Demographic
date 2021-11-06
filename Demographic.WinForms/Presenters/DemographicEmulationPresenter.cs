@@ -34,8 +34,18 @@ namespace Demographic.WinForms.Presenters
             _view.FinalYearValueChange += (year) => OnFinalYearValueChanged(year);
             _view.CountPersonsStartChange += (value) => OnCountPersonsValueChanged(value);
             _view.KoeffValueChange += (value) => OnKoeffValueChange(value);
+            _view.CancelEmulationClick += OnCancelEmulationClick;
         }
-        
+
+        public void OnCancelEmulationClick()
+        {
+            if (_backgroundWorker != null && _backgroundWorker.IsBusy)
+            {
+                _backgroundWorker.CancelAsync();
+                _view.SetProgressBarValue(0);
+            }
+        }
+
         public void OnKoeffValueChange(uint value)
         {
             _engineConfig.Koeff = value;
@@ -77,21 +87,32 @@ namespace Demographic.WinForms.Presenters
             _backgroundWorker.WorkerSupportsCancellation = true;
             _backgroundWorker.DoWork += new DoWorkEventHandler(worker_doWork);
             _backgroundWorker.ProgressChanged += (o, e) => _view.SetProgressBarValue(e.ProgressPercentage);
-            _backgroundWorker.RunWorkerCompleted += (o, e) => { OnEmulationEnd(); _view.SetProgressBarValue(0); };
+            _backgroundWorker.RunWorkerCompleted += (o, e) => OnEmulationEnd(e.Cancelled);
             _backgroundWorker.RunWorkerAsync();
         }
 
         private void worker_doWork(object sender, DoWorkEventArgs e)
         {
+            _backgroundWorker.ReportProgress(1);
             _engine.InitEngine(_engineConfig);
-            _engine.StartImitation(_backgroundWorker.ReportProgress);
+            _engine.StartImitation(_backgroundWorker, e);
+
+            if (e.Cancel) return;
 
             _view.ShowInfoMessage("Моделирование окончено");
             _snapshots = _engine.SnapshotYears;
         }
 
-        private void OnEmulationEnd()
+        private void OnEmulationEnd(bool cancelled)
         {
+            _view.SetProgressBarValue(0);
+            _view.ClearSplineCharts();
+            if (cancelled)
+            {
+                _view.ShowInfoMessage("Операция была прервана");
+                return;
+            }
+
             var values1 = _snapshots.Select(p => new UIntValuePair { Key = p.Year, Value = p.CountTotalAlivePersons }).ToList();
             _view.RenderCountTotalAlivePersonsChart(values1);
             var values2 = _snapshots.Select(p => new UIntValuePair { Key = p.Year, Value = p.CountTotalDeathPersons }).ToList();

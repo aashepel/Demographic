@@ -82,7 +82,7 @@ namespace Demographic
             }
         }
 
-        public void StartImitation(Action<int> reportProgress)
+        public void StartImitation(BackgroundWorker backgroundWorker, DoWorkEventArgs e)
         {
             if (!_isInitializing)
             {
@@ -93,7 +93,14 @@ namespace Demographic
 
             while (TickYear())
             {
-                reportProgress?.Invoke((int)((_currentYear - _leftLimitYear) / (_rightLimitYear - _leftLimitYear) * 100));
+                int percantage = (int)((double)(_currentYear - _leftLimitYear) / (double)(_rightLimitYear - _leftLimitYear) * 100d);
+                Console.WriteLine(percantage);
+                backgroundWorker.ReportProgress(percantage, $"{_currentYear} year");
+                if (backgroundWorker.CancellationPending)
+                {
+                    e.Cancel = true;
+                    return;
+                }
             }
         }
 
