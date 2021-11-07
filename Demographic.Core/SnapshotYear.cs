@@ -30,19 +30,19 @@ namespace Demographic.Core
 
         public uint CountBirthPerYear { get; set; }
 
-        public List<UIntValuePair> CountBirthPerYearByAge { get; set; }
+        public List<StringUIntValuePair> CountBirthPerYearByAge { get; set; }
 
         public uint CountDeathPerYear { get; set; }
 
-        public List<UIntValuePair> CountDeathPerYearByAge { get; set; }
+        public List<StringUIntValuePair> CountDeathPerYearByAge { get; set; }
 
         #endregion
 
         #region AgeCategoriesCount
 
-        public Dictionary<string, uint> CountPersonsAliveByAgeCategories { get; set; } // 0-18, 19-44, 45-65, 66-100 
-        public Dictionary<string, uint> CountMalePersonsAliveByAgeCategories { get; set; } // 0-18, 19-44, 45-65, 66-100
-        public Dictionary<string, uint> CountFemalePersonsAliveByAgeCategories { get; set; } // 0-18, 19-44, 45-65, 66-100
+        public List<StringUIntValuePair> CountPersonsAliveByAgeCategories { get; set; } // 0-18, 19-44, 45-65, 66-100 
+        public List<StringUIntValuePair> CountMalePersonsAliveByAgeCategories { get; set; } // 0-18, 19-44, 45-65, 66-100
+        public List<StringUIntValuePair> CountFemalePersonsAliveByAgeCategories { get; set; } // 0-18, 19-44, 45-65, 66-100
 
         #endregion
     }

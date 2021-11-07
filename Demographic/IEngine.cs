@@ -17,7 +17,7 @@ namespace Demographic
         DeathProbablilityService DeathProbablilityService { get; }
         List<SnapshotYear> SnapshotYears { get; }
         uint CurrentYear { get; }
-        void StartImitation(BackgroundWorker backgroundWorker, DoWorkEventArgs e);
-        void InitEngine(EngineConfig config);
+        void StartImitation(DoWorkEventArgs e);
+        void InitEngine(EngineConfig config, BackgroundWorker backgroundWorker, DoWorkEventArgs e);
     }
 }

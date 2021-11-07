@@ -36,6 +36,17 @@ namespace Demographic.WinForms.Presenters
             _view.CountPersonsStartChange += (value) => OnCountPersonsValueChanged(value);
             _view.KoeffValueChange += (value) => OnKoeffValueChange(value);
             _view.CancelEmulationClick += OnCancelEmulationClick;
+            _view.YearBarChartsChange += (value) => OnYearBarChartsChanged(value);
+        }
+
+        public void OnYearBarChartsChanged(uint value)
+        {
+            var snapshot = _snapshots.FirstOrDefault(p => p.Year == value);
+            _view.RenderCountBirthPerYearByAge(snapshot.CountBirthPerYearByAge);
+            _view.RenderCountDeathPerYearByAge(snapshot.CountDeathPerYearByAge);
+            _view.RenderCountPersonsAliveByAgeCategories(snapshot.CountPersonsAliveByAgeCategories);
+            _view.RenderCountMalePersonsAliveByAgeCategories(snapshot.CountMalePersonsAliveByAgeCategories);
+            _view.RenderCountFemalePersonsAliveByAgeCategories(snapshot.CountFemalePersonsAliveByAgeCategories);
         }
 
         public void OnCancelEmulationClick()
@@ -78,6 +89,7 @@ namespace Demographic.WinForms.Presenters
 
         public void OnStartEmulationClicked()
         {
+            _view.SetEnabledConditionElementsOnEmulation(false);
             if (_engineConfig.FilePathDeathRule == null || _engineConfig.FilePathInitialAge == null)
             {
                 _view.ShowErrorMessage("Сначала выберите все файлы");
@@ -86,10 +98,9 @@ namespace Demographic.WinForms.Presenters
             _backgroundWorker = new BackgroundWorker();
             _backgroundWorker.WorkerReportsProgress = true;
             _backgroundWorker.WorkerSupportsCancellation = true;
-            _backgroundWorker.DoWork += new DoWorkEventHandler(worker_doWork);
+            _backgroundWorker.DoWork += new DoWorkEventHandler(workerDoWork);
             _backgroundWorker.ProgressChanged += (o, e) =>
             {
-                _snapshots = _engine.SnapshotYears;
                 _view.SetProgressBarValue(e.ProgressPercentage);
                 _view.SetStatusProgress(e.UserState as string);
             };
@@ -97,13 +108,19 @@ namespace Demographic.WinForms.Presenters
             _backgroundWorker.RunWorkerAsync();
         }
 
-        private void worker_doWork(object sender, DoWorkEventArgs e)
+        private void workerDoWork(object sender, DoWorkEventArgs e)
         {
-            _engine.InitEngine(_engineConfig);
-            _backgroundWorker.ReportProgress(0, $"0% - Движок проинициализирован");
-            _engine.StartImitation(_backgroundWorker, e);
+            _engine.InitEngine(_engineConfig, _backgroundWorker, e);
 
-            if (e.Cancel) return;
+            if (e.Cancel)
+                return;
+
+            _backgroundWorker.ReportProgress(0, $"0% - Движок проинициализирован");
+
+            _engine.StartImitation(e);
+
+            if (e.Cancel) 
+                return;
 
             _view.ShowInfoMessage("Моделирование окончено");
             _snapshots = _engine.SnapshotYears;
@@ -114,9 +131,11 @@ namespace Demographic.WinForms.Presenters
             _view.SetProgressBarValue(0);
             _view.SetStatusProgress("");
             _view.ClearSplineCharts();
+            _view.SetEnabledConditionElementsOnEmulation(true);
             if (cancelled)
             {
                 _view.ShowInfoMessage("Операция была прервана");
+                _view.ClearValuesComboBox();
                 return;
             }
             RenderCharts();
@@ -129,13 +148,11 @@ namespace Demographic.WinForms.Presenters
             var values2 = _snapshots.Select(p => new UIntValuePair { Key = p.Year, Value = p.CountTotalDeathPersons }).ToList();
             _view.RenderCountTotalDeathPersonsChart(values2);
             var values3 = _snapshots.Select(p => new UIntValuePair { Key = p.Year, Value = p.CountTotalMaleAlivePersons }).ToList();
-            _view.RenderCountTotalMaleAlivePersonsChart(values3);
             var values4 = _snapshots.Select(p => new UIntValuePair { Key = p.Year, Value = p.CountTotalFemaleAlivePersons }).ToList();
-            _view.RenderCountTotalFemaleAlivePersonsChart(values4);
+            _view.RenderCountTotalMaleFemaleAlivePersonsChart(values3, values4);
             var values5 = _snapshots.Select(p => new UIntValuePair { Key = p.Year, Value = p.CountBirthPerYear }).ToList();
-            _view.RenderBirthRateChart(values5);
             var values6 = _snapshots.Select(p => new UIntValuePair { Key = p.Year, Value = p.CountDeathPerYear }).ToList();
-            _view.RenderDeathRateChart(values6);
+            _view.RenderBirthDeathRateChart(values5, values6);
             var values7 = _snapshots.Select(p => new UIntValuePair { Key = p.Year, Value = p.CountTotalMaleDeathPersons }).ToList();
             _view.RenderCountTotalMaleDeathPersonsChart(values7);
             var values8 = _snapshots.Select(p => new UIntValuePair { Key = p.Year, Value = p.CountTotalFemaleDeathPersons }).ToList();

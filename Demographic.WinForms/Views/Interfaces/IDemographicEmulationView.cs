@@ -26,27 +26,42 @@ namespace Demographic.WinForms.Views.Interfaces
 
         event Action CancelEmulationClick;
 
+        event Action<uint> YearBarChartsChange;
+
         void RenderCountTotalAlivePersonsChart(List<UIntValuePair> values);
 
         void RenderCountTotalDeathPersonsChart(List<UIntValuePair> values);
 
-        void RenderCountTotalMaleAlivePersonsChart(List<UIntValuePair> values);
+        void RenderCountTotalMaleFemaleAlivePersonsChart(List<UIntValuePair> valuesMale, List<UIntValuePair> valuesFemale);
 
-        void RenderCountTotalFemaleAlivePersonsChart(List<UIntValuePair> values);
-
-        void RenderBirthRateChart(List<UIntValuePair> values);
-
-        void RenderDeathRateChart(List<UIntValuePair> values);
+        void RenderBirthDeathRateChart(List<UIntValuePair> valuesBirthRate, List<UIntValuePair> valuesDeathRate);
 
         void RenderCountTotalMaleDeathPersonsChart(List<UIntValuePair> values);
 
         void RenderCountTotalFemaleDeathPersonsChart(List<UIntValuePair> values);
 
+
+
+        void RenderCountBirthPerYearByAge(List<StringUIntValuePair> values);
+        
+        void RenderCountDeathPerYearByAge(List <StringUIntValuePair> values);
+
+        void RenderCountPersonsAliveByAgeCategories(List<StringUIntValuePair> values);
+
+        void RenderCountMalePersonsAliveByAgeCategories(List<StringUIntValuePair> values);
+
+        void RenderCountFemalePersonsAliveByAgeCategories(List<StringUIntValuePair> values);
+
+
         void SetLabelFilePathInitialAgeRules(string value);
 
         void SetLabelFilePathDeathRules(string value);
 
+        void SetEnabledConditionComboBoxYears(bool enabled);
+
         void SetEnabledEmulationStartButton(bool enabled);
+
+        void SetEnabledConditionElementsOnEmulation(bool enabled);
 
         void SetValuesComboBoxYear(List<int> values);
 
@@ -55,5 +70,9 @@ namespace Demographic.WinForms.Views.Interfaces
         void SetStatusProgress(string status);
 
         void ClearSplineCharts();
+
+        void ClearBarCharts();
+
+        void ClearAllCharts();
     }
 }

@@ -10,7 +10,6 @@ namespace Demographic
     public class Person
     {
         private readonly Gender _gender;
-        private uint _age = 0;
         private readonly uint _yearOfBirth;
         private uint? _yearOfDeath = null;
         private readonly UInt64 _id;
@@ -18,14 +17,13 @@ namespace Demographic
         private LifeStatus _lifeStatus = LifeStatus.Alive;
         private IEngine _engine;
 
-        public Person(Gender gender, UInt64? motherId, IEngine engine, uint age = 0)
+        public Person(Gender gender, UInt64? motherId, IEngine engine, uint yearOfBirth)
         {
-            _age = age;
             _gender = gender;
             _motherId = motherId;
             _engine = engine;
             _id = _engine.CounterPepoles;
-            _yearOfBirth = engine.CurrentYear - _age;
+            _yearOfBirth = yearOfBirth;
             _engine.YearTick += yearPlusPlus;
         }
 
@@ -46,7 +44,7 @@ namespace Demographic
 
         public uint Age
         {
-            get { return _age; }
+            get { return _engine.CurrentYear - _yearOfBirth; }
         }
 
         public LifeStatus LifeStatus
@@ -65,12 +63,11 @@ namespace Demographic
         }
 
         private void yearPlusPlus()
-        {
+        {            
             if (_lifeStatus == LifeStatus.Dead)
             {
                 throw new Exception("Did not unsubscribe");
             }
-            _age++;
             if (_engine.DeathProbablilityService.IsDeath(this))
             {
                 _yearOfDeath = _engine.CurrentYear;
@@ -85,7 +82,7 @@ namespace Demographic
 
         private void BirthChild()
         {   
-            if (_lifeStatus == LifeStatus.Alive && _gender == Gender.Female && _age >= 18 && _age <= 45 && ProbabilityCalculator.IsEventHappened(0.151))
+            if (_lifeStatus == LifeStatus.Alive && _gender == Gender.Female && Age >= 18 && Age <= 45 && ProbabilityCalculator.IsEventHappened(0.151))
             {
                 Gender gender;
                 if (ProbabilityCalculator.IsEventHappened(0.55))
@@ -96,7 +93,7 @@ namespace Demographic
                 {
                     gender = Gender.Female;
                 }
-                var person = new Person(gender, this.Id, _engine);
+                var person = new Person(gender, this.Id, _engine, _engine.CurrentYear);
                 _engine.OnChildBirth(person);
             }
         }

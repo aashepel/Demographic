@@ -4,6 +4,7 @@ using Demographic.Services;
 using Demographic.Core;
 using System.Linq;
 using System.ComponentModel;
+using Demographic.Core.Services;
 
 namespace Demographic
 {
@@ -37,22 +38,26 @@ namespace Demographic
 
         private bool _isInitializing = false;
 
-        public Engine(EngineConfig config)
-        {
-            InitEngine(config);
-            _isInitializing = true;
-        }
+        private BackgroundWorker _backgroundWorker;
+
+        //public Engine(EngineConfig config)
+        //{
+        //    InitEngine(config, null, null);
+        //    _isInitializing = true;
+        //}
         
         public Engine()
         {
             _isInitializing = false;
         }
 
-        public void InitEngine(EngineConfig config)
+        public void InitEngine(EngineConfig config, BackgroundWorker backgroundWorker, DoWorkEventArgs e)
         {
+            _backgroundWorker = backgroundWorker;
             _counterPepolesId = 0;
             _persons.Clear();
             _snapshotYears.Clear();
+
 
             _filePathDeathRule = config.FilePathDeathRule;
             _filePathInitialAgeRules = config.FilePathInitialAge;
@@ -68,35 +73,55 @@ namespace Demographic
             _initialAgeRuleService = new InitialAgeRuleService(_filePathInitialAgeRules);
             foreach(var rule in _initialAgeRuleService.Rules)
             {
-                int currentCountMales = (int)(rule.Percent / 2d / 1000d * _startCountPeoples);
-                int currentCountFemales = (int)(rule.Percent / 2d / 1000d * _startCountPeoples);
+                uint currentCountMales = (uint)(rule.Percent / 1000d / 2d * _startCountPeoples);
+                uint currentCountFemales = (uint)(rule.Percent / 1000d / 2d * _startCountPeoples);
                 for (int i = 0; i < currentCountMales; i++)
                 {
-                    _persons.Add(new Person(Enums.Gender.Male, null, this, rule.Age));
+                    if (i % 10000 == 0)
+                    {
+                        _backgroundWorker?.ReportProgress(0, $"Инициализация жителя. ID жителя = {LabelPointService.GetDividedNumberString(_counterPepolesId)}");
+                        if (_backgroundWorker.CancellationPending)
+                        {
+                            e.Cancel = true;
+                            return;
+                        }
+                    }
+                    _persons.Add(new Person(Enums.Gender.Male, null, this, _currentYear - rule.Age));
                 }
 
                 for (int i = 0; i < currentCountFemales; i++)
                 {
-                    _persons.Add(new Person(Enums.Gender.Female, null, this, rule.Age));
+                    if (i % 10000 == 0)
+                    {
+                        _backgroundWorker?.ReportProgress(0, $"Инициализация жителя. ID жителя = {LabelPointService.GetDividedNumberString(_counterPepolesId)}");
+                        if (_backgroundWorker.CancellationPending)
+                        {
+                            e.Cancel = true;
+                            return;
+                        }
+                    }
+                    _persons.Add(new Person(Enums.Gender.Female, null, this, _currentYear - rule.Age));
                 }
             }
         }
 
-        public void StartImitation(BackgroundWorker backgroundWorker, DoWorkEventArgs e)
+        public void StartImitation(DoWorkEventArgs e)
         {
             if (!_isInitializing)
             {
                 throw new Exception("Движок не иницииализрован");
             }
 
+            YearTick?.Invoke();
+            int percantage = (int)((_currentYear - _leftLimitYear) / (double)(_rightLimitYear - _leftLimitYear) * 100d);
+            _backgroundWorker.ReportProgress(percantage, $"{percantage}% - {_currentYear} year");
             _snapshotYears.Add(SnapshotYearService.GetSnapshot(_currentYear, _persons, _koeff));
 
             while (TickYear())
             {
-                int percantage = (int)((double)(_currentYear - _leftLimitYear) / (double)(_rightLimitYear - _leftLimitYear) * 100d);
-                Console.WriteLine(percantage);
-                backgroundWorker.ReportProgress(percantage, $"{percantage}% - {_currentYear} year");
-                if (backgroundWorker.CancellationPending)
+                percantage = (int)((_currentYear - _leftLimitYear) / (double)(_rightLimitYear - _leftLimitYear) * 100d);
+                _backgroundWorker.ReportProgress(percantage, $"{percantage}% - {_currentYear} year");
+                if (_backgroundWorker.CancellationPending)
                 {
                     e.Cancel = true;
                     return;

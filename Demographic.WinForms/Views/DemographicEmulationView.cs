@@ -6,10 +6,12 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using Demographic.Core;
 using Demographic.WinForms.Views.Interfaces;
+using Demographic.Core.Services;
 
 namespace Demographic.WinForms
 {
@@ -17,6 +19,8 @@ namespace Demographic.WinForms
     {
 
         private List<Chart> _splineCharts = new List<Chart>();
+        private List<Chart> _barCharts = new List<Chart>();
+        private System.Windows.Forms.ToolTip _toolTip = new System.Windows.Forms.ToolTip();
 
 
         public event Action InitialAgeRulesOpenFileClick;
@@ -35,18 +39,25 @@ namespace Demographic.WinForms
 
         public event Action CancelEmulationClick;
 
+        public event Action<uint> YearBarChartsChange;
+
         public DemographicEmulationView()
         {
             InitializeComponent();
 
-            _splineCharts.Add(chartBirthPerYear);
+            _splineCharts.Add(chartBirthDeathRate);
             _splineCharts.Add(chartCountTotalAlivePersons);
             _splineCharts.Add(chartCountTotalDeathPersons);
-            _splineCharts.Add(chartCountTotalFemaleAlivePersons);
             _splineCharts.Add(chartCountTotalFemaleDeathPersons);
-            _splineCharts.Add(chartCountTotalMaleAlivePersons);
+            _splineCharts.Add(chartCountTotalMaleFemaleAlivePersons);
             _splineCharts.Add(chartCountTotalMaleDeathPersons);
-            _splineCharts.Add(chartDeathPerYear);
+            _splineCharts.Add(chartBirthDeathRate);
+
+            _barCharts.Add(chartCountBirthPerYearByAge);
+            _barCharts.Add(chartCountDeathPerYearByAge);
+            _barCharts.Add(chartCountFemalePersonsAliveByAgeCategories);
+            _barCharts.Add(chartCountMalePersonsAliveByAgeCategories);
+            _barCharts.Add(chartCountPersonsAliveByAgeCategories);
 
 
             btnStartEmulation.Click += (sender, e) => StartEmulationClick?.Invoke();
@@ -58,6 +69,8 @@ namespace Demographic.WinForms
             numericUpDownStartYear.ValueChanged += (sender, e) => StartYearValueChange?.Invoke((int)numericUpDownStartYear.Value);
             numericUpDownFinalYear.ValueChanged += (sender, e) => FinalYearValueChange?.Invoke((int)numericUpDownFinalYear.Value);
             numericUpDownKoeff.ValueChanged += (sender, e) => KoeffValueChange?.Invoke((uint)numericUpDownKoeff.Value);
+
+            comboBoxYearValues.SelectedValueChanged += (sender, e) => YearBarChartsChange?.Invoke(uint.Parse(comboBoxYearValues.Text));
         }
 
         void IDemographicEmulationView.RenderCountTotalAlivePersonsChart(List<UIntValuePair> values)
@@ -70,14 +83,10 @@ namespace Demographic.WinForms
             RenderSplineChart(chartCountTotalDeathPersons, values);
         }
 
-        void IDemographicEmulationView.RenderCountTotalMaleAlivePersonsChart(List<UIntValuePair> values)
+        void IDemographicEmulationView.RenderCountTotalMaleFemaleAlivePersonsChart(List<UIntValuePair> valuesMale, List<UIntValuePair> valuesFemale)
         {
-            RenderSplineChart(chartCountTotalMaleAlivePersons, values);
-        }
-
-        void IDemographicEmulationView.RenderCountTotalFemaleAlivePersonsChart(List<UIntValuePair> values)
-        {
-            RenderSplineChart(chartCountTotalFemaleAlivePersons, values);
+            RenderSplineChart(chartCountTotalMaleFemaleAlivePersons, valuesMale, 0, "Мужчины");
+            RenderSplineChart(chartCountTotalMaleFemaleAlivePersons, valuesFemale, 1, "Женщины");
         }
 
         void IView.ShowErrorMessage(string message)
@@ -141,28 +150,63 @@ namespace Demographic.WinForms
             chart.ChartAreas[0].AxisX.Interval = 1;
         }
 
-        private void RenderSplineChart(Chart chart, List<UIntValuePair> values)
+        private void ConfiguringBarChart(Chart chart)
         {
-            ConfiguringSplineChart(chart);
+            chart.ChartAreas[0].AxisX.LabelStyle.Interval = 1;
+            chart.ChartAreas[0].AxisX.Interval = 1;
+        }
 
-            ToolTip toolTip = new ToolTip();
+        private void RenderSplineChart(Chart chart, List<UIntValuePair> values, uint seriesIndex = 0, string seriesText = "")
+        {
+            if (seriesIndex == 0)
+            {
+                ConfiguringSplineChart(chart);
+            }
+            else
+            {
+                if (chart.Series.Count == seriesIndex)
+                {
+                    chart.Series.Add($"series {seriesIndex}");
+                    chart.Legends.Add("Legend");
+                }
+                else
+                {
+                    throw new Exception("Error");
+                }
+            }
 
-            var series = chart.Series[0];
+            var series = chart.Series[(int)seriesIndex];
+            series.ChartType = SeriesChartType.Spline;
             series.Points.Clear();
+            series.BorderWidth = 5;
+            series.LegendText = seriesText;
             foreach (var point in values)
             {
                 series.Points.AddXY(point.Key, point.Value);
             }
         }
 
-        void IDemographicEmulationView.RenderBirthRateChart(List<UIntValuePair> values)
+        private void RenderBarChart(Chart chart, List<StringUIntValuePair> values)
         {
-            RenderSplineChart(chartBirthPerYear, values);
+            ConfiguringBarChart(chart);
+
+            var series = chart.Series[0];
+            uint sum = 0;
+            series.Points.Clear();
+            foreach(var point in values)
+            {
+                int indexPoint = series.Points.AddXY(point.Key, point.Value);
+                series.Points[indexPoint].Label = LabelPointService.GetShortLabel(point.Value);
+                sum += point.Value;
+            }
+
+            _toolTip.SetToolTip(chart, $"Сумма: {LabelPointService.GetDividedNumberString(sum)}");
         }
 
-        void IDemographicEmulationView.RenderDeathRateChart(List<UIntValuePair> values)
+        void IDemographicEmulationView.RenderBirthDeathRateChart(List<UIntValuePair> valuesBirthRate, List<UIntValuePair> valuesDeathRate)
         {
-            RenderSplineChart(chartDeathPerYear, values);
+            RenderSplineChart(chartBirthDeathRate, valuesBirthRate, 0, "Рождаемость");
+            RenderSplineChart(chartBirthDeathRate, valuesDeathRate, 1, "Смертность");
         }
 
         void IDemographicEmulationView.SetValuesComboBoxYear(List<int> values)
@@ -178,10 +222,14 @@ namespace Demographic.WinForms
 
         private void ClearChart(Chart chart)
         {
-            chart.Series[0].Points.Clear();
+            foreach(var series in chart.Series)
+            {
+                series.Points.Clear();
+            }
+            chart.Legends.Clear();
         }
 
-        void IDemographicEmulationView.ClearSplineCharts()
+        public void ClearSplineCharts()
         {
             foreach(var chart in _splineCharts)
             {
@@ -202,6 +250,62 @@ namespace Demographic.WinForms
         void IDemographicEmulationView.RenderCountTotalFemaleDeathPersonsChart(List<UIntValuePair> values)
         {
             RenderSplineChart(chartCountTotalFemaleDeathPersons, values);
+        }
+
+        void IDemographicEmulationView.RenderCountBirthPerYearByAge(List<StringUIntValuePair> values)
+        {
+            RenderBarChart(chartCountBirthPerYearByAge, values);
+        }
+
+        void IDemographicEmulationView.RenderCountDeathPerYearByAge(List<StringUIntValuePair> values)
+        {
+            RenderBarChart(chartCountDeathPerYearByAge, values);
+        }
+
+        void IDemographicEmulationView.RenderCountPersonsAliveByAgeCategories(List<StringUIntValuePair> values)
+        {
+            RenderBarChart(chartCountPersonsAliveByAgeCategories, values);
+        }
+
+        void IDemographicEmulationView.RenderCountMalePersonsAliveByAgeCategories(List<StringUIntValuePair> values)
+        {
+            RenderBarChart(chartCountMalePersonsAliveByAgeCategories, values);
+        }
+
+        void IDemographicEmulationView.RenderCountFemalePersonsAliveByAgeCategories(List<StringUIntValuePair> values)
+        {
+            RenderBarChart(chartCountFemalePersonsAliveByAgeCategories, values);
+        }
+
+        void IDemographicEmulationView.SetEnabledConditionComboBoxYears(bool enabled)
+        {
+            comboBoxYearValues.Enabled = enabled;
+        }
+
+        public void ClearBarCharts()
+        {
+            foreach (var chart in _barCharts)
+            {
+                ClearChart(chart);
+            }
+        }
+
+        void IDemographicEmulationView.ClearAllCharts()
+        {
+            ClearBarCharts();
+            ClearSplineCharts();
+        }
+
+        void IDemographicEmulationView.SetEnabledConditionElementsOnEmulation(bool enabled)
+        {
+            btnDeathRuleFileOpen.Enabled = enabled;
+            btnOpenInitialAgeRulesFile.Enabled = enabled;
+            btnStartEmulation.Enabled = enabled;
+            comboBoxYearValues.Enabled = enabled;
+            textBoxCountPersonsStart.Enabled = enabled;
+            numericUpDownStartYear.Enabled = enabled;
+            numericUpDownKoeff.Enabled = enabled;
+            numericUpDownFinalYear.Enabled = enabled;
         }
     }
 }
