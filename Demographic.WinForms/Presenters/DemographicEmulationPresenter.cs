@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Demographic.Core;
 using Demographic.WinForms.Views.Interfaces;
@@ -86,15 +87,20 @@ namespace Demographic.WinForms.Presenters
             _backgroundWorker.WorkerReportsProgress = true;
             _backgroundWorker.WorkerSupportsCancellation = true;
             _backgroundWorker.DoWork += new DoWorkEventHandler(worker_doWork);
-            _backgroundWorker.ProgressChanged += (o, e) => _view.SetProgressBarValue(e.ProgressPercentage);
+            _backgroundWorker.ProgressChanged += (o, e) =>
+            {
+                _snapshots = _engine.SnapshotYears;
+                _view.SetProgressBarValue(e.ProgressPercentage);
+                _view.SetStatusProgress(e.UserState as string);
+            };
             _backgroundWorker.RunWorkerCompleted += (o, e) => OnEmulationEnd(e.Cancelled);
             _backgroundWorker.RunWorkerAsync();
         }
 
         private void worker_doWork(object sender, DoWorkEventArgs e)
         {
-            _backgroundWorker.ReportProgress(1);
             _engine.InitEngine(_engineConfig);
+            _backgroundWorker.ReportProgress(0, $"0% - Движок проинициализирован");
             _engine.StartImitation(_backgroundWorker, e);
 
             if (e.Cancel) return;
@@ -106,13 +112,18 @@ namespace Demographic.WinForms.Presenters
         private void OnEmulationEnd(bool cancelled)
         {
             _view.SetProgressBarValue(0);
+            _view.SetStatusProgress("");
             _view.ClearSplineCharts();
             if (cancelled)
             {
                 _view.ShowInfoMessage("Операция была прервана");
                 return;
             }
+            RenderCharts();
+        }
 
+        private void RenderCharts()
+        {
             var values1 = _snapshots.Select(p => new UIntValuePair { Key = p.Year, Value = p.CountTotalAlivePersons }).ToList();
             _view.RenderCountTotalAlivePersonsChart(values1);
             var values2 = _snapshots.Select(p => new UIntValuePair { Key = p.Year, Value = p.CountTotalDeathPersons }).ToList();
@@ -125,6 +136,10 @@ namespace Demographic.WinForms.Presenters
             _view.RenderBirthRateChart(values5);
             var values6 = _snapshots.Select(p => new UIntValuePair { Key = p.Year, Value = p.CountDeathPerYear }).ToList();
             _view.RenderDeathRateChart(values6);
+            var values7 = _snapshots.Select(p => new UIntValuePair { Key = p.Year, Value = p.CountTotalMaleDeathPersons }).ToList();
+            _view.RenderCountTotalMaleDeathPersonsChart(values7);
+            var values8 = _snapshots.Select(p => new UIntValuePair { Key = p.Year, Value = p.CountTotalFemaleDeathPersons }).ToList();
+            _view.RenderCountTotalFemaleDeathPersonsChart(values8);
             var comboBoxYearValues = Enumerable.Range((int)_engineConfig.LeftLimitYear, (int)(_engineConfig.RightLimitYear - _engineConfig.LeftLimitYear + 1)).ToList();
             _view.SetValuesComboBoxYear(comboBoxYearValues);
         }

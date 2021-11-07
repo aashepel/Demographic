@@ -38,6 +38,10 @@ namespace Demographic.WinForms.Views.Interfaces
 
         void RenderDeathRateChart(List<UIntValuePair> values);
 
+        void RenderCountTotalMaleDeathPersonsChart(List<UIntValuePair> values);
+
+        void RenderCountTotalFemaleDeathPersonsChart(List<UIntValuePair> values);
+
         void SetLabelFilePathInitialAgeRules(string value);
 
         void SetLabelFilePathDeathRules(string value);
@@ -47,6 +51,8 @@ namespace Demographic.WinForms.Views.Interfaces
         void SetValuesComboBoxYear(List<int> values);
 
         void SetProgressBarValue(int value);
+
+        void SetStatusProgress(string status);
 
         void ClearSplineCharts();
     }

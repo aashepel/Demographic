@@ -66,6 +66,10 @@ namespace Demographic
 
         private void yearPlusPlus()
         {
+            if (_lifeStatus == LifeStatus.Dead)
+            {
+                throw new Exception("Did not unsubscribe");
+            }
             _age++;
             if (_engine.DeathProbablilityService.IsDeath(this))
             {

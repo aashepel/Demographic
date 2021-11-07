@@ -95,7 +95,7 @@ namespace Demographic
             {
                 int percantage = (int)((double)(_currentYear - _leftLimitYear) / (double)(_rightLimitYear - _leftLimitYear) * 100d);
                 Console.WriteLine(percantage);
-                backgroundWorker.ReportProgress(percantage, $"{_currentYear} year");
+                backgroundWorker.ReportProgress(percantage, $"{percantage}% - {_currentYear} year");
                 if (backgroundWorker.CancellationPending)
                 {
                     e.Cancel = true;

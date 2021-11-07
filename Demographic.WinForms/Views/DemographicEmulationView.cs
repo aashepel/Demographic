@@ -188,5 +188,20 @@ namespace Demographic.WinForms
                 ClearChart(chart);
             }
         }
+
+        void IDemographicEmulationView.SetStatusProgress(string status)
+        {
+            lblProgressStatus.Text = status;
+        }
+
+        void IDemographicEmulationView.RenderCountTotalMaleDeathPersonsChart(List<UIntValuePair> values)
+        {
+            RenderSplineChart(chartCountTotalMaleDeathPersons, values);
+        }
+
+        void IDemographicEmulationView.RenderCountTotalFemaleDeathPersonsChart(List<UIntValuePair> values)
+        {
+            RenderSplineChart(chartCountTotalFemaleDeathPersons, values);
+        }
     }
 }
